@@ -5,7 +5,9 @@ tokens = (
     'HIGHKEY', 'LOWKEY', 'IDENTIFIER', 'NUMBER', 'STRING', 'ASSIGN', 'LPAREN', 'RPAREN',
     'SEMICOLON', 'VIBECHECK', 'BIGYIKES', 'LEFTPILLED', 'RIGHTMAXXER', 'SHOUTOUT', 'FUCKAROUND',
     'FINDOUT', 'ITSGIVING', 'SPILLTEA', 'YAP', 'YEET', 'RATIOS','GRIND','CAP','NOCAP','GG','PERIODT',
-    'TEA','CRINGE','BRUH','REDFLAG','BODYCOUNT','SLEPTON','STAN','NPC'
+    'TEA','CRINGE','BRUH','REDFLAG','BODYCOUNT','SLEPTON','STAN','NPC','IYKYK','SITUATIONSHIP','HOOKUP',
+    'BASED','POURTEA','OOF','ICK','TWEAKING','SNEAKYLINK','BFFR','HOMIES','RUNATRAIN','GETYOURBOY','NOHOMO',
+    'MANDEM','COMMA','MID'
 )
 
 # Regular expression rules for simple tokens
@@ -117,6 +119,70 @@ def t_NPC(t):
     r'npc'
     return t
 
+def t_IYKYK(t):
+    r'iykyk'
+    return t
+
+def t_SITUATIONSHIP(t):
+    r'situationship'
+    return t
+
+def t_HOOKUP(t):
+    r'hooks_up_with'
+    return t
+
+def t_BASED(t):
+    r'based'
+    return t
+
+def t_POURTEA(t):
+    r'pour_tea'
+    return t
+
+def t_OOF(t):
+    r'oof'
+    return t
+
+def t_TWEAKING(t):
+    r'tweaking'
+    return t
+
+def t_ICK(t):
+    r'ick'
+    return t
+
+def t_SNEAKYLINK(t):
+    r'sneaky_link'
+    return t
+
+def t_BFFR(t):
+    r'bffr'
+    return t
+
+def t_HOMIES(t):
+    r'homies'
+    return t
+
+def t_RUNATRAIN(t):
+    r'run_a_train_on'
+    return t
+
+def t_GETYOURBOY(t):
+    r'get_your_boy'
+    return t
+
+def t_NOHOMO(t):
+    r'no_homo_tho'
+    return t
+
+def t_MANDEM(t):
+    r'mandem'
+    return t
+
+def t_MID(t):
+    r'mid'
+    return t
+
 # Regular expression rules for simple tokens
 def t_ASSIGN(t):
     r'='
@@ -149,6 +215,10 @@ def t_STRING(t):
     t.value = t.value[1:-1]
     return t
 
+def t_COMMA(t):
+    r','
+    return t
+
 # Define a dictionary of reserved words for the lexer
 reserved = {
     'ate': 'ATE',
@@ -156,7 +226,6 @@ reserved = {
     'banger': 'BANGER',
     'basic': 'BASIC',
     'bet': 'BET',
-    'bffr': 'BFFR',
     'brainrot': 'BRAINROT',
     'cook': 'COOK',
     'cooked': 'COOKED',
@@ -172,7 +241,6 @@ reserved = {
     'gyat': 'GYAT',
     'ick': 'ICK',
     'oop': 'OOP',
-    'iykyk': 'IYKYK',
     'karen': 'KAREN',
     'lit': 'LIT',
     'mew': 'MEW',
@@ -188,7 +256,6 @@ reserved = {
     'shook': 'SHOOK',
     'sigma': 'SIGMA',
     'simp': 'SIMP',
-    'situationship': 'SITUATIONSHIP',
     'skibidi': 'SKIBIDI',
     'slaps': 'SLAPS',
     'slay': 'SLAY',

@@ -35,11 +35,20 @@ def p_statement(p):
                  | input_statement
                  | import_statement
                  | def_statement
+                 | break_statement
+                 | create_dict_statement
+                 | add_to_dict_statement
+                 | init_logging_statement
+                 | logging_statement
+                 | lookup_dict_statement
+                 | list_assignment_statement
+                 | list_access_statement
+                 | list_creation_statement
                  | empty'''
     p[0] = p[1]
 
 def p_declaration_statement(p):
-    '''declaration_statement : HIGHKEY IDENTIFIER ASSIGN expression SEMICOLON'''
+    'declaration_statement : HIGHKEY IDENTIFIER ASSIGN expression SEMICOLON'
     p[0] = ('declaration', p[2], p[4])
 
 def p_assignment_statement(p):
@@ -47,8 +56,16 @@ def p_assignment_statement(p):
     p[0] = ('assignment', p[2], p[4])
 
 def p_if_statement(p):
-    'if_statement : VIBECHECK LPAREN expression RPAREN LEFTPILLED statement_list RIGHTMAXXER else_clause'
-    p[0] = ('if', p[3], p[6], p[8])
+    'if_statement : VIBECHECK LPAREN expression RPAREN LEFTPILLED statement_list RIGHTMAXXER elif_clauses else_clause'
+    p[0] = ('if', p[3], p[6], p[8], p[9])
+
+def p_elif_clauses(p):
+    '''elif_clauses : elif_clauses MID LPAREN expression RPAREN LEFTPILLED statement_list RIGHTMAXXER 
+                    | empty'''
+    if len(p) == 2:
+        p[0] = []
+    else:
+        p[0] = p[1] + [('elif', p[4], p[7])]
 
 def p_else_clause(p):
     '''else_clause : BIGYIKES LEFTPILLED statement_list RIGHTMAXXER
@@ -56,7 +73,7 @@ def p_else_clause(p):
     if len(p) == 2:
         p[0] = None
     else:
-        p[0] = ('else', p[3])
+        p[0] = p[3]
 
 def p_while_statement(p):
     'while_statement : GRIND LPAREN expression RPAREN LEFTPILLED statement_list RIGHTMAXXER'
@@ -73,11 +90,16 @@ def p_expression(p):
                   | NUMBER
                   | STRING
                   | IDENTIFIER
-                  | expression RATIOS expression'''
-    p[0] = p[1]
+                  | expression RATIOS expression
+                  '''
+    if len(p) == 2:
+        p[0] = p[1]
+    elif p[2] == 'ratios':
+        p[0] = ('ratios', p[1], p[3])
 
 def p_return_statement(p):
-    'return_statement : ITSGIVING expression SEMICOLON'
+    '''return_statement : ITSGIVING expression SEMICOLON
+                        | ITSGIVING IDENTIFIER SEMICOLON'''
     p[0] = ('return', p[2])
 
 def p_exit_statement(p):
@@ -97,19 +119,14 @@ def p_except_clause(p):
         p[0] = ('except', p[3])
 
 def p_print_statement(p):
-    'print_statement : SHOUTOUT LPAREN expression RPAREN SEMICOLON'
+    '''print_statement : SHOUTOUT LPAREN expression RPAREN SEMICOLON
+                       | SHOUTOUT LPAREN IDENTIFIER RPAREN SEMICOLON'''
     p[0] = ('print', p[3])
 
 def p_raise_statement(p):
-    'raise_statement : SPILLTEA exception_clause SEMICOLON'
-    p[0] = ('raise', p[2])
-
-def p_exception_clause(p):
-    '''exception_clause : TEA
-                        | CRINGE
-                        | BRUH
-                        | REDFLAG'''
-    p[0] = p[1]
+    '''raise_statement : BRUH CRINGE LEFTPILLED expression RIGHTMAXXER
+                       | BRUH BASED LEFTPILLED expression RIGHTMAXXER'''
+    p[0] = ('raise', p[2], p[4])
 
 def p_len_statement(p):
     'len_statement : BODYCOUNT LPAREN expression RPAREN SEMICOLON'
@@ -124,20 +141,76 @@ def p_pass_statement(p):
     p[0] = ('pass',)
 
 def p_input_statement(p):
-    'input_statement : YAP LPAREN expression RPAREN SEMICOLON'
-    p[0] = ('input', p[3])
+    'input_statement : IDENTIFIER BFFR LEFTPILLED expression RIGHTMAXXER'
+    p[0] = ('input', p[1], p[4])
 
 def p_import_statement(p):
     'import_statement : STAN expression SEMICOLON'
     p[0] = ('import', p[2])
 
-#def p_add_to_dict_statement(p):
-#    'add_to_dict_statement : SITUATIONSHIP IDENTIFIER LPAREN expression COMMA expression RPAREN SEMICOLON'
-#    p[0] = ('add_to_dict', p[2], p[4], p[6])
+def p_add_to_dict_statement(p):
+    '''add_to_dict_statement : SITUATIONSHIP IDENTIFIER LEFTPILLED expression HOOKUP expression RIGHTMAXXER
+                             | SITUATIONSHIP IDENTIFIER LEFTPILLED IDENTIFIER HOOKUP expression RIGHTMAXXER
+                             | SITUATIONSHIP IDENTIFIER LEFTPILLED expression HOOKUP IDENTIFIER RIGHTMAXXER
+                             | SITUATIONSHIP IDENTIFIER LEFTPILLED IDENTIFIER HOOKUP IDENTIFIER RIGHTMAXXER'''
+    p[0] = ('add_to_dict', p[2], p[4], p[6])
 
 def p_def_statement(p):
     'def_statement : NPC IDENTIFIER LPAREN RPAREN LEFTPILLED statement_list RIGHTMAXXER' 
     p[0] = ('def', p[2], p[6])
+
+def p_break_statement(p):  # Doesnt seem to work
+    'break_statement : GG SEMICOLON'
+    p[0] = ('break')
+
+def p_create_dict_statement(p):
+    '''create_dict_statement : IYKYK IDENTIFIER LEFTPILLED expression SITUATIONSHIP expression RIGHTMAXXER
+                             | IYKYK IDENTIFIER SEMICOLON'''
+    if len(p) == 4:
+        p[0] = ('init_dict', p[2])
+    else:
+        p[0] = ('create_dict', p[2], p[4], p[6])
+
+def p_init_logging_statement(p):
+    '''init_logging_statement : POURTEA TEA SEMICOLON
+                              | POURTEA YAP SEMICOLON
+                              | POURTEA OOF SEMICOLON
+                              | POURTEA TWEAKING SEMICOLON
+                              | POURTEA ICK SEMICOLON'''
+    p[0] = ('init_logging', p[2])
+
+def p_logging_statement(p):
+    '''logging_statement : SPILLTEA TEA LEFTPILLED expression RIGHTMAXXER
+                         | SPILLTEA YAP LEFTPILLED expression RIGHTMAXXER
+                         | SPILLTEA OOF LEFTPILLED expression RIGHTMAXXER
+                         | SPILLTEA TWEAKING LEFTPILLED expression RIGHTMAXXER
+                         | SPILLTEA ICK LEFTPILLED expression RIGHTMAXXER'''
+    p[0] = ('log',p[2],p[4])
+
+def p_lookup_dict_statement(p):
+    'lookup_dict_statement : IDENTIFIER SNEAKYLINK IDENTIFIER LEFTPILLED expression RIGHTMAXXER'
+    p[0] = ('lookup',p[1],p[3],p[5])
+
+def p_list_assignment_statement(p):
+    'list_assignment_statement : MANDEM IDENTIFIER LEFTPILLED expression RIGHTMAXXER expression SEMICOLON'
+    p[0] = ('add_to_list',p[2],p[4],p[6])
+
+def p_list_access_statement(p):
+    'list_access_statement : IDENTIFIER GETYOURBOY IDENTIFIER expression SEMICOLON'
+    p[0] = ('get',p[1],p[3],p[4])
+
+def p_list_creation_statement(p):
+    'list_creation_statement : IDENTIFIER HOMIES elements NOHOMO'
+    p[0] = ('list',p[1],p[3])
+
+def p_elements(p):
+    '''elements : elements COMMA expression
+                | expression'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[1].append(p[3])
+        p[0] = p[1]
 
 def p_empty(p):
     'empty :'
