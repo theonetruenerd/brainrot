@@ -44,6 +44,7 @@ def p_statement(p):
                  | list_assignment_statement
                  | list_access_statement
                  | list_creation_statement
+                 | loop_through_list_statement
                  | empty'''
     p[0] = p[1]
 
@@ -129,8 +130,8 @@ def p_raise_statement(p):
     p[0] = ('raise', p[2], p[4])
 
 def p_len_statement(p):
-    'len_statement : BODYCOUNT LPAREN expression RPAREN SEMICOLON'
-    p[0] = ('len', p[3])
+    'len_statement : IDENTIFIER BODYCOUNT LEFTPILLED IDENTIFIER RIGHTMAXXER'
+    p[0] = ('len', p[1], p[4])
 
 def p_del_statement(p):
     'del_statement : YEET IDENTIFIER SEMICOLON'
@@ -156,15 +157,44 @@ def p_add_to_dict_statement(p):
     p[0] = ('add_to_dict', p[2], p[4], p[6])
 
 def p_def_statement(p):
-    'def_statement : NPC IDENTIFIER LPAREN RPAREN LEFTPILLED statement_list RIGHTMAXXER' 
-    p[0] = ('def', p[2], p[6])
+    'def_statement : NPC IDENTIFIER LPAREN param_list RPAREN LEFTPILLED statement_list RIGHTMAXXER' 
+    p[0] = ('def', p[2], p[4], p[7])
+
+def p_param_list(p):
+    '''param_list : param_list COMMA IDENTIFIER
+                  | IDENTIFIER
+                  | empty'''
+    if len(p) == 2:
+        if p[1] is None:
+            p[0] = []
+        else: p[0] = [p[1]]
+    else:
+        p[1].append(p[3])
+        p[0] = p[1]
+
+def p_function_call(p):
+    'expression : IDENTIFIER LPAREN arg_list RPAREN'
+    p[0] = ('call', p[1], p[3])
+
+def p_arg_list(p):
+    '''arg_list : arg_list COMMA expression
+                | expression
+                | empty'''
+    if len(p) == 2:
+        if p[1] is None:
+            p[0] = []
+        else:
+            p[0] = [p[1]]
+    else:
+        p[1].append(p[3])
+        p[0] = p[1]
 
 def p_break_statement(p):  # Doesnt seem to work
     'break_statement : GG SEMICOLON'
     p[0] = ('break')
 
 def p_create_dict_statement(p):
-    '''create_dict_statement : IYKYK IDENTIFIER LEFTPILLED expression SITUATIONSHIP expression RIGHTMAXXER
+    '''create_dict_statement : IYKYK IDENTIFIER LEFTPILLED expression HOOKUP expression RIGHTMAXXER
                              | IYKYK IDENTIFIER SEMICOLON'''
     if len(p) == 4:
         p[0] = ('init_dict', p[2])
@@ -211,6 +241,10 @@ def p_elements(p):
     else:
         p[1].append(p[3])
         p[0] = p[1]
+
+def p_loop_through_list_statement(p):
+    'loop_through_list_statement : RUNATRAIN IDENTIFIER LEFTPILLED statement_list RIGHTMAXXER'
+    p[0] = ('loop_through_list',p[2],p[4])
 
 def p_empty(p):
     'empty :'
