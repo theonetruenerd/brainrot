@@ -26,7 +26,21 @@ def eval_expression(expr):
             return eval_expression(args[0]) > eval_expression(args[1])
         elif op == 'situationship':
             return {args[0]: args[1]}
+#        elif op == 'call':
+#            func_name = args[0]
+#            func_args = [(eval_expression(arg) for arg in args[1])]
+#            func_call(func_name,func_args)
     return expr
+
+# Function to call functions
+#def func_call(func_name, func_args):
+#    func_def = symbol_table[func_name]
+#    if func_def[0] != 'def':
+#        raise TypeError(f"{func_name} is not a function")
+#    _, _, param_names, body = func_def
+#    if len(func_args) != len(param_names):
+#        raise TypeError(f"{func_name} expected {len(param_names)} arguments, recieved {len(func_args)}")
+#    return exec_statement_list(body)
 
 # Function to execute statements
 def exec_statement(statement):
@@ -83,7 +97,7 @@ def exec_statement(statement):
         elif raisetype == 'based':
             raise OSError(eval_expression(exc))
     elif stmt_type == 'len':
-        print(len(eval_expression(statement[1])))
+        symbol_table[statement[1]] = (len(symbol_table[statement[2]]))
     elif stmt_type == 'del':
         var = statement[1]
         if var in symbol_table:
@@ -101,8 +115,10 @@ def exec_statement(statement):
             importlib.import_module(lib_name)
         except ImportError:
             print(f"Error: Could not import module {lib_name}")
-    elif stmt_type == 'def':
-        pass  # Function definitions can be handled here
+    #elif stmt_type == 'def':
+    #    _, func_name, params, body = statement
+    #    symbol_table[func_name] = ['def', func_name, params, body]
+    #    print(symbol_table)
     elif stmt_type == 'init_dict':
         _, var = statement
         symbol_table[var] = {}
@@ -149,6 +165,10 @@ def exec_statement(statement):
     elif stmt_type == 'add_to_list':
         _, ls, item, ind = statement
         symbol_table[ls].insert(eval_expression(ind), eval_expression(item))
+    elif stmt_type == 'loop_through_list':
+        _, ls, block = statement
+        for item in symbol_table[ls]:
+            exec_statement_list(block)
 
 # Function to execute a list of statements
 def exec_statement_list(statements):
