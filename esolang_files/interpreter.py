@@ -11,20 +11,21 @@ def eval_expression(expr):
     if isinstance(expr, int) or isinstance(expr, str):
         return expr
     elif isinstance(expr, tuple):
-        op, arg1, arg2 = expr
+        op, *args = expr
         if op == 'assign':
-            symbol_table[arg1] = eval_expression(arg2)
-            return symbol_table[arg1]
+            var, value = args
+            symbol_table[var] = eval_expression(value)
+            return symbol_table[var]
         elif op == 'identifier':
-            return symbol_table.get(arg1, None)
+            return symbol_table.get(args[0], None)
         elif op == 'number':
-            return int(arg1)
+            return int(args[0])
         elif op == 'string':
-            return str(arg1)
+            return str(args[0])
         elif op == 'ratios':
-            return eval_expression(arg1) > eval_expression(arg2)
+            return eval_expression(args[0]) > eval_expression(args[1])
         elif op == 'situationship':
-            return {arg1:arg2}
+            return {args[0]: args[1]}
     return expr
 
 # Function to execute statements
@@ -53,8 +54,8 @@ def exec_statement(statement):
             if not executed and else_block:
                 exec_statement_list(else_block)
     elif stmt_type == 'while':
-        _, condition, block = statement 
-        while eval_expression(condition):  # This doesn't seem to recheck condition for loops so just continues
+        _, condition, block = statement
+        while eval_expression(condition):
             exec_statement_list(block)
     elif stmt_type == 'expression':
         eval_expression(statement[1])
@@ -68,7 +69,7 @@ def exec_statement(statement):
         try:
             exec_statement_list(try_block)
         except Exception as e:
-            exec_statement(except_block)
+            exec_statement_list(except_block)
     elif stmt_type == 'print':
         identifier_or_expression = statement[1]
         if identifier_or_expression in symbol_table:
@@ -97,7 +98,7 @@ def exec_statement(statement):
         _, lib = statement
         lib_name = eval_expression(lib)
         try:
-            lib_name = importlib.import_module(lib_name)
+            importlib.import_module(lib_name)
         except ImportError:
             print(f"Error: Could not import module {lib_name}")
     elif stmt_type == 'def':
@@ -107,18 +108,10 @@ def exec_statement(statement):
         symbol_table[var] = {}
     elif stmt_type == 'create_dict':
         _, name, key, value = statement
-        if key in symbol_table:
-            key = symbol_table[key]
-        if value in symbol_table:
-            value = symbol_table[value]
         symbol_table[name] = {}
         symbol_table[name][eval_expression(key)] = eval_expression(value)
     elif stmt_type == 'add_to_dict':
         _, name, key, value = statement
-        if key in symbol_table:
-            key = symbol_table[key]
-        if value in symbol_table:
-            value = symbol_table[value]
         symbol_table[name][eval_expression(key)] = eval_expression(value)
     elif stmt_type == 'lookup':
         _, var, dict_name, key = statement
@@ -149,21 +142,17 @@ def exec_statement(statement):
             logging.critical(eval_expression(expression))
     elif stmt_type == 'list':
         _, var, elems = statement
-        var_list = []
-        for elem in elems:
-            var_list.append(eval_expression(elem))
-        symbol_table[var] = var_list
+        symbol_table[var] = [eval_expression(elem) for elem in elems]
     elif stmt_type == 'get':
         _, ind, ls, elem = statement
-        if ls in symbol_table:  # Add in error catch
-            symbol_table[ind] = symbol_table[ls].index(elem)
+        symbol_table[ind] = symbol_table[ls].index(eval_expression(elem))
     elif stmt_type == 'add_to_list':
         _, ls, item, ind = statement
-        if ls in symbol_table:  # Add in error catch
-            symbol_table[ls] = symbol_table[ls].insert(item,ind)
+        symbol_table[ls].insert(eval_expression(ind), eval_expression(item))
+
 # Function to execute a list of statements
 def exec_statement_list(statements):
-    for statement in statements:  
+    for statement in statements:
         stmt_type = statement[0]
         if stmt_type == 'break':
             break
