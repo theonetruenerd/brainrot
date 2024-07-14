@@ -10,7 +10,7 @@ iykyk y;
 
 shoutout(y);
 
-iykyk z leftpilled tarun situationship chapman rightmaxxer
+iykyk z leftpilled tarun hooks_up_with chapman rightmaxxer
 
 shoutout(z);
 
@@ -40,9 +40,16 @@ shoutout(f);
 
 tc homies test, test2, test3 no_homo_tho
 
+length bodycount leftpilled tc rightmaxxer
+
+shoutout(length);
+
 shoutout(tc);
 
-vibe_check (4 ratios 4) leftpilled shoutout(1); rightmaxxer 
-big_yikes leftpilled shoutout(3); rightmaxxer
+run_a_train_on tc leftpilled shoutout(1); rightmaxxer
 
-shoutout(4);
+vibe_check (5 ratios 4) leftpilled shoutout("success"); rightmaxxer 
+big_yikes leftpilled shoutout("failure"); rightmaxxer
+
+shoutout(lilyhasbrainrot);
+
