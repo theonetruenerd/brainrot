@@ -221,8 +221,8 @@ def t_COMMA(t):
 
 # Define a dictionary of reserved words for the lexer
 reserved = {
+    'aura': 'AURA',
     'ate': 'ATE',
-    'based': 'BASED',
     'banger': 'BANGER',
     'basic': 'BASIC',
     'bet': 'BET',
@@ -239,15 +239,12 @@ reserved = {
     'ghost': 'GHOST',
     'goat': 'GOAT',
     'gyat': 'GYAT',
-    'ick': 'ICK',
     'oop': 'OOP',
     'karen': 'KAREN',
     'lit': 'LIT',
     'mew': 'MEW',
-    'mid': 'MID',
     'npc': 'NPC',
     'oomf': 'OOMF',
-    'oof': 'OOF',
     'opp': 'OPP',
     'owned': 'OWNED',
     'rizz': 'RIZZ',
@@ -262,7 +259,6 @@ reserved = {
     'snatched': 'SNATCHED',
     'sus': 'SUS',
     'touch_grass': 'TOUCHGRASS',
-    'tweaking': 'TWEAKING',
     'uwu': 'UWU',
     'valid': 'VALID',
     'wig': 'WIG'
