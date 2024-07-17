@@ -2,6 +2,7 @@ import sys
 import importlib
 from parser import parser
 import logging
+import re
 
 # A dictionary to hold variable values
 symbol_table = {}
@@ -14,8 +15,11 @@ def eval_expression(expr):
         op, *args = expr
         if op == 'assign':
             var, value = args
-            symbol_table[var] = eval_expression(value)
-            return symbol_table[var]
+            if isinstance(value, type(symbol_table[var])):
+                symbol_table[var] = eval_expression(value)
+                return symbol_table[var]
+            else:
+                raise Exception('Invalid type')
         elif op == 'identifier':
             return symbol_table.get(args[0], None)
         elif op == 'number':
@@ -26,21 +30,26 @@ def eval_expression(expr):
             return eval_expression(args[0]) > eval_expression(args[1])
         elif op == 'situationship':
             return {args[0]: args[1]}
-#        elif op == 'call':
-#            func_name = args[0]
-#            func_args = [(eval_expression(arg) for arg in args[1])]
-#            func_call(func_name,func_args)
     return expr
 
 # Function to call functions
-#def func_call(func_name, func_args):
-#    func_def = symbol_table[func_name]
-#    if func_def[0] != 'def':
-#        raise TypeError(f"{func_name} is not a function")
-#    _, _, param_names, body = func_def
-#    if len(func_args) != len(param_names):
-#        raise TypeError(f"{func_name} expected {len(param_names)} arguments, recieved {len(func_args)}")
-#    return exec_statement_list(body)
+
+def func_call(func_name, func_args):
+    func_def = symbol_table[func_name]
+    if func_def[0] != 'def':
+        raise TypeError(f"{func_name} is not a function")
+    _, param_names, body = func_def
+    if len(func_args) != len(param_names):
+        raise TypeError(f"{func_name} expected {len(param_names)} arguments, recieved {len(func_args)}")
+    
+    backup_symbol_table = symbol_table.copy()
+    for param, arg in zip(param_names, func_args):
+        symbol_table[param] = arg
+
+    exec_statement_list(body)   
+
+    symbol_table.clear()
+    symbol_table.update(backup_symbol_table)
 
 # Function to execute statements
 def exec_statement(statement):
@@ -48,7 +57,18 @@ def exec_statement(statement):
         return
     stmt_type = statement[0]
     if stmt_type == 'declaration':
-        _, var, value = statement
+        _, var, vartype, value = statement
+        try:
+            if vartype == 'ghost':
+                value = float(value)
+            elif vartype == 'lead_on':
+                value = str(value)
+            elif vartype == 'basic':
+                value = int(value)
+            elif vartype == 'bet':
+                value = bool(value)
+        except:
+            raise Exception('Type declared and value are not compatible.')
         symbol_table[var] = eval_expression(value)
     elif stmt_type == 'assignment':
         _, var, value = statement
@@ -86,10 +106,15 @@ def exec_statement(statement):
             exec_statement_list(except_block)
     elif stmt_type == 'print':
         identifier_or_expression = statement[1]
-        if identifier_or_expression in symbol_table:
-            print(symbol_table[identifier_or_expression])
+        if identifier_or_expression == 'identifier_print':
+            if statement[2] in symbol_table:
+                print(symbol_table[statement[2]])
+            else:
+                raise Exception('Identifier not found in symbol table. Did you mean to have quotation marks around your statement?')
+        elif identifier_or_expression == 'expression_print':
+            print(eval_expression(statement[2]))
         else:
-            print(eval_expression(statement[1]))
+            raise Exception('Invalid print type')
     elif stmt_type == 'raise':
         _, raisetype, exc = statement
         if raisetype == 'cringe':
@@ -115,10 +140,9 @@ def exec_statement(statement):
             importlib.import_module(lib_name)
         except ImportError:
             print(f"Error: Could not import module {lib_name}")
-    #elif stmt_type == 'def':
-    #    _, func_name, params, body = statement
-    #    symbol_table[func_name] = ['def', func_name, params, body]
-    #    print(symbol_table)
+    elif stmt_type == 'def':
+        _, func_name, params, body = statement
+        symbol_table[func_name] = ['def',params, body]
     elif stmt_type == 'init_dict':
         _, var = statement
         symbol_table[var] = {}
@@ -169,6 +193,26 @@ def exec_statement(statement):
         _, ls, block = statement
         for item in symbol_table[ls]:
             exec_statement_list(block)
+    elif stmt_type == 'call':
+        _,func_name, params = statement
+        func_call(func_name, params)
+    elif stmt_type == 'read':
+        _, var, filename = statement
+        with open(eval_expression(filename), 'r', encoding='utf-8') as f:
+            symbol_table[var] = f.read()
+            f.close()
+    elif stmt_type == 'find_pressure':
+        _, var, filename = statement
+        with open(eval_expression(filename), 'r', encoding='utf-8') as f:
+            symbol_table[var] = f.read()
+            matched_lines = [line for line in symbol_table[var].split('\n') if "Compatible pipetting parameters" in line]
+            f.close()
+        for line in matched_lines:
+            print("----------")
+            matches = re.findall(r'PipettingParameters=([^\]]+)', line)
+            for match in matches:
+                print(match)
+            print("----------")
 
 # Function to execute a list of statements
 def exec_statement_list(statements):

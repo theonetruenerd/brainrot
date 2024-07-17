@@ -7,7 +7,7 @@ tokens = (
     'FINDOUT', 'ITSGIVING', 'SPILLTEA', 'YAP', 'YEET', 'RATIOS','GRIND','CAP','NOCAP','GG','PERIODT',
     'TEA','CRINGE','BRUH','REDFLAG','BODYCOUNT','SLEPTON','STAN','NPC','IYKYK','SITUATIONSHIP','HOOKUP',
     'BASED','POURTEA','OOF','ICK','TWEAKING','SNEAKYLINK','BFFR','HOMIES','RUNATRAIN','GETYOURBOY','NOHOMO',
-    'MANDEM','COMMA','MID'
+    'MANDEM','COMMA','MID','COOK','BET','BASIC','LEADON','GHOST','UWU','WHATSTHIS','PRESSUREERROR'
 )
 
 # Regular expression rules for simple tokens
@@ -183,6 +183,38 @@ def t_MID(t):
     r'mid'
     return t
 
+def t_COOK(t):
+    r'cook'
+    return t
+
+def t_BET(t):
+    r'bet'
+    return t
+
+def t_BASIC(t):
+    r'basic'
+    return t
+
+def t_GHOST(t):
+    r'ghost'
+    return t
+
+def t_LEADON(t):
+    r'lead_on'
+    return t
+
+def t_UWU(t):
+    r'uwu'
+    return t
+
+def t_WHATSTHIS(t):
+    r'whats_this'
+    return t
+
+def t_PRESSUREERROR(t):
+    r'pressure_error'
+    return t
+
 # Regular expression rules for simple tokens
 def t_ASSIGN(t):
     r'='
@@ -224,8 +256,6 @@ reserved = {
     'aura': 'AURA',
     'ate': 'ATE',
     'banger': 'BANGER',
-    'basic': 'BASIC',
-    'bet': 'BET',
     'brainrot': 'BRAINROT',
     'cook': 'COOK',
     'cooked': 'COOKED',
@@ -243,7 +273,6 @@ reserved = {
     'karen': 'KAREN',
     'lit': 'LIT',
     'mew': 'MEW',
-    'npc': 'NPC',
     'oomf': 'OOMF',
     'opp': 'OPP',
     'owned': 'OWNED',
@@ -259,7 +288,6 @@ reserved = {
     'snatched': 'SNATCHED',
     'sus': 'SUS',
     'touch_grass': 'TOUCHGRASS',
-    'uwu': 'UWU',
     'valid': 'VALID',
     'wig': 'WIG'
 }

@@ -35,6 +35,7 @@ def p_statement(p):
                  | input_statement
                  | import_statement
                  | def_statement
+                 | function_call_statement
                  | break_statement
                  | create_dict_statement
                  | add_to_dict_statement
@@ -45,12 +46,18 @@ def p_statement(p):
                  | list_access_statement
                  | list_creation_statement
                  | loop_through_list_statement
+                 | read_statement
+                 | find_pressure_error_statement
                  | empty'''
     p[0] = p[1]
 
 def p_declaration_statement(p):
-    'declaration_statement : HIGHKEY IDENTIFIER ASSIGN expression SEMICOLON'
-    p[0] = ('declaration', p[2], p[4])
+    '''declaration_statement : HIGHKEY IDENTIFIER LEADON ASSIGN expression SEMICOLON
+                             | HIGHKEY IDENTIFIER BASIC ASSIGN expression SEMICOLON
+                             | HIGHKEY IDENTIFIER GHOST ASSIGN expression SEMICOLON
+                             | HIGHKEY IDENTIFIER BET ASSIGN expression SEMICOLON
+                             '''
+    p[0] = ('declaration', p[2], p[3], p[5])
 
 def p_assignment_statement(p):
     'assignment_statement : LOWKEY IDENTIFIER ASSIGN expression SEMICOLON'
@@ -120,9 +127,12 @@ def p_except_clause(p):
         p[0] = ('except', p[3])
 
 def p_print_statement(p):
-    '''print_statement : SHOUTOUT LPAREN expression RPAREN SEMICOLON
-                       | SHOUTOUT LPAREN IDENTIFIER RPAREN SEMICOLON'''
-    p[0] = ('print', p[3])
+    '''print_statement : SHOUTOUT LEFTPILLED IDENTIFIER RIGHTMAXXER SEMICOLON
+                       | SHOUTOUT LPAREN expression RPAREN SEMICOLON'''
+    if p[2] == 'leftpilled':
+        p[0] = ('print','identifier_print',p[3])
+    else:
+        p[0] = ('print','expression_print',p[3])
 
 def p_raise_statement(p):
     '''raise_statement : BRUH CRINGE LEFTPILLED expression RIGHTMAXXER
@@ -172,9 +182,9 @@ def p_param_list(p):
         p[1].append(p[3])
         p[0] = p[1]
 
-def p_function_call(p):
-    'expression : IDENTIFIER LPAREN arg_list RPAREN'
-    p[0] = ('call', p[1], p[3])
+def p_function_call_statement(p):
+    'function_call_statement : COOK IDENTIFIER LPAREN arg_list RPAREN'
+    p[0] = ('call', p[2], p[4])
 
 def p_arg_list(p):
     '''arg_list : arg_list COMMA expression
@@ -245,6 +255,14 @@ def p_elements(p):
 def p_loop_through_list_statement(p):
     'loop_through_list_statement : RUNATRAIN IDENTIFIER LEFTPILLED statement_list RIGHTMAXXER'
     p[0] = ('loop_through_list',p[2],p[4])
+
+def p_read_statement(p):
+    'read_statement : UWU IDENTIFIER WHATSTHIS STRING SEMICOLON'
+    p[0] = ('read',p[2],p[4])
+
+def p_find_pressure_error_statement(p):
+    'find_pressure_error_statement : UWU IDENTIFIER PRESSUREERROR STRING SEMICOLON'
+    p[0] = ('find_pressure',p[2],p[4])
 
 def p_empty(p):
     'empty :'
