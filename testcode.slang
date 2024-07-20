@@ -1,12 +1,13 @@
-uwu x whats_this "C:\Users\tchapman\Downloads\test.txt";
+uwu heres_whats_wrong whats_this "C:\Users\tarun\Downloads\LogFile 2024-07-16 16.48.03.591.txt";
 
-lowkey cpp = "Compatible pipetting parameters";
-lowkey pp = "PipettingParameters";
+highkey cpp lead_on = "Compatible pipetting parameters";
+highkey pp lead_on = "PipettingParameters=([^\]]+)";
 
-skibidi x (z) leftpilled
-	present roman_empire z ate "Compatible pipetting parameters"
-	present valid
-	vibe_check(yesno) leftpilled shoutout leftpilled z rightmaxxer; rightmaxxer
+skibidi heres_whats_wrong (where_we_at) leftpilled
+	present roman_empire where_we_at ate cpp
+	vibe_check(present valid) leftpilled
+		parameters where_we_at gagged pp
+		shoutout leftpilled parameters rightmaxxer;
+	rightmaxxer
+
 rightmaxxer
-
-shoutout("Got shere");
