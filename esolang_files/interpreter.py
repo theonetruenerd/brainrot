@@ -190,17 +190,33 @@ def exec_statement(statement):
         _, ls, item, ind = statement
         symbol_table[ls].insert(eval_expression(ind), eval_expression(item))
     elif stmt_type == 'loop_through_list':
-        _, ls, block = statement
+        _, ls, identifier_tag, block = statement
         for item in symbol_table[ls]:
+            symbol_table[identifier_tag] = item
             exec_statement_list(block)
+        del symbol_table[identifier_tag]
     elif stmt_type == 'call':
         _,func_name, params = statement
         func_call(func_name, params)
     elif stmt_type == 'read':
         _, var, filename = statement
+        symbol_table[var] = []
         with open(eval_expression(filename), 'r', encoding='utf-8') as f:
-            symbol_table[var] = f.read()
+            for line in f:
+                symbol_table[var].append(line)
             f.close()
+    elif stmt_type == 'find_substring':
+        _, var, string, substring = statement
+        if var in symbol_table:
+            del symbol_table[var]
+        if substring in symbol_table:
+            substring = symbol_table[substring]
+        if string in symbol_table:
+            string = symbol_table[string]
+        if substring in string:
+            symbol_table[var] = 'no_cap'
+        else:
+            symbol_table[var] = 'cap'
     elif stmt_type == 'find_pressure':
         _, var, filename = statement
         with open(eval_expression(filename), 'r', encoding='utf-8') as f:
@@ -213,13 +229,23 @@ def exec_statement(statement):
             for match in matches:
                 print(match)
             print("----------")
+    elif stmt_type == 'is_true':
+        _, var, expr = statement
+        if eval_expression(expr) == True:
+            symbol_table[var] = True
+        else:
+            symbol_table[var] = False
+
+
+class BreakLoop(Exception):
+    pass
 
 # Function to execute a list of statements
 def exec_statement_list(statements):
     for statement in statements:
         stmt_type = statement[0]
         if stmt_type == 'break':
-            break
+            raise BreakLoop()
         else:
             exec_statement(statement)
 

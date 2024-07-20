@@ -7,7 +7,8 @@ tokens = (
     'FINDOUT', 'ITSGIVING', 'SPILLTEA', 'YAP', 'YEET', 'RATIOS','GRIND','CAP','NOCAP','GG','PERIODT',
     'TEA','CRINGE','BRUH','REDFLAG','BODYCOUNT','SLEPTON','STAN','NPC','IYKYK','SITUATIONSHIP','HOOKUP',
     'BASED','POURTEA','OOF','ICK','TWEAKING','SNEAKYLINK','BFFR','HOMIES','RUNATRAIN','GETYOURBOY','NOHOMO',
-    'MANDEM','COMMA','MID','COOK','BET','BASIC','LEADON','GHOST','UWU','WHATSTHIS','PRESSUREERROR'
+    'MANDEM','COMMA','MID','COOK','BET','BASIC','LEADON','GHOST','UWU','WHATSTHIS','ROMANEMPIRE','ATE','SKIBIDI',
+    'VALID'
 )
 
 # Regular expression rules for simple tokens
@@ -211,8 +212,20 @@ def t_WHATSTHIS(t):
     r'whats_this'
     return t
 
-def t_PRESSUREERROR(t):
-    r'pressure_error'
+def t_ROMANEMPIRE(t):
+    r'roman_empire'
+    return t
+
+def t_ATE(t):
+    r'ate'
+    return t
+
+def t_SKIBIDI(t):
+    r'skibidi'
+    return t
+
+def t_VALID(t):
+    r'valid'
     return t
 
 # Regular expression rules for simple tokens
@@ -254,7 +267,6 @@ def t_COMMA(t):
 # Define a dictionary of reserved words for the lexer
 reserved = {
     'aura': 'AURA',
-    'ate': 'ATE',
     'banger': 'BANGER',
     'brainrot': 'BRAINROT',
     'cook': 'COOK',
@@ -277,7 +289,6 @@ reserved = {
     'opp': 'OPP',
     'owned': 'OWNED',
     'rizz': 'RIZZ',
-    'roman_empire': 'ROMANEMPIRE',
     'salty': 'SALTY',
     'shook': 'SHOOK',
     'sigma': 'SIGMA',
@@ -288,7 +299,6 @@ reserved = {
     'snatched': 'SNATCHED',
     'sus': 'SUS',
     'touch_grass': 'TOUCHGRASS',
-    'valid': 'VALID',
     'wig': 'WIG'
 }
 

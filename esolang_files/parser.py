@@ -46,8 +46,9 @@ def p_statement(p):
                  | list_access_statement
                  | list_creation_statement
                  | loop_through_list_statement
+                 | find_substring_statement
                  | read_statement
-                 | find_pressure_error_statement
+                 | valid_statement
                  | empty'''
     p[0] = p[1]
 
@@ -99,6 +100,7 @@ def p_expression(p):
                   | STRING
                   | IDENTIFIER
                   | expression RATIOS expression
+                  | expression VALID
                   '''
     if len(p) == 2:
         p[0] = p[1]
@@ -253,20 +255,28 @@ def p_elements(p):
         p[0] = p[1]
 
 def p_loop_through_list_statement(p):
-    'loop_through_list_statement : RUNATRAIN IDENTIFIER LEFTPILLED statement_list RIGHTMAXXER'
-    p[0] = ('loop_through_list',p[2],p[4])
+    '''loop_through_list_statement : RUNATRAIN IDENTIFIER LPAREN IDENTIFIER RPAREN LEFTPILLED statement_list RIGHTMAXXER
+                                   | SKIBIDI IDENTIFIER LPAREN IDENTIFIER RPAREN LEFTPILLED statement_list RIGHTMAXXER'''
+    p[0] = ('loop_through_list',p[2],p[4],p[7])
 
 def p_read_statement(p):
     'read_statement : UWU IDENTIFIER WHATSTHIS STRING SEMICOLON'
     p[0] = ('read',p[2],p[4])
 
-def p_find_pressure_error_statement(p):
-    'find_pressure_error_statement : UWU IDENTIFIER PRESSUREERROR STRING SEMICOLON'
-    p[0] = ('find_pressure',p[2],p[4])
+def p_find_substring_statement(p):
+    '''find_substring_statement : IDENTIFIER ROMANEMPIRE expression ATE expression
+                                | IDENTIFIER ROMANEMPIRE IDENTIFIER ATE expression
+                                | IDENTIFIER ROMANEMPIRE IDENTIFIER ATE IDENTIFIER
+                                | IDENTIFIER ROMANEMPIRE expression ATE IDENTIFIER'''
+    p[0] = ('find_substring',p[1],p[3],p[5])
 
 def p_empty(p):
     'empty :'
     pass
+
+def p_is_true_statement(p):
+    'valid_statement : IDENTIFIER expression VALID'
+    p[0] = ('is_true',p[1],p[2])
 
 def p_error(p):
     if p:
