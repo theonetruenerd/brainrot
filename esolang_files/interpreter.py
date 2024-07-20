@@ -30,6 +30,11 @@ def eval_expression(expr):
             return eval_expression(args[0]) > eval_expression(args[1])
         elif op == 'situationship':
             return {args[0]: args[1]}
+        elif op == 'valid':
+            if symbol_table[args[0]]:
+                return True
+            else:
+                return False
     return expr
 
 # Function to call functions
@@ -110,7 +115,7 @@ def exec_statement(statement):
             if statement[2] in symbol_table:
                 print(symbol_table[statement[2]])
             else:
-                raise Exception('Identifier not found in symbol table. Did you mean to have quotation marks around your statement?')
+                raise Exception('Identifier not found in symbol table.')
         elif identifier_or_expression == 'expression_print':
             print(eval_expression(statement[2]))
         else:
@@ -214,21 +219,16 @@ def exec_statement(statement):
         if string in symbol_table:
             string = symbol_table[string]
         if substring in string:
-            symbol_table[var] = 'no_cap'
+            symbol_table[var] = True
         else:
-            symbol_table[var] = 'cap'
-    elif stmt_type == 'find_pressure':
-        _, var, filename = statement
-        with open(eval_expression(filename), 'r', encoding='utf-8') as f:
-            symbol_table[var] = f.read()
-            matched_lines = [line for line in symbol_table[var].split('\n') if "Compatible pipetting parameters" in line]
-            f.close()
-        for line in matched_lines:
-            print("----------")
-            matches = re.findall(r'PipettingParameters=([^\]]+)', line)
-            for match in matches:
-                print(match)
-            print("----------")
+            symbol_table[var] = False
+    elif stmt_type == 'extract_string':
+        _, var, string, substring = statement
+        if substring in symbol_table:
+            substring = symbol_table[substring]
+        if string in symbol_table:
+            string = symbol_table[string]
+        symbol_table[var] = re.findall(eval_expression(substring), string)
     elif stmt_type == 'is_true':
         _, var, expr = statement
         if eval_expression(expr) == True:
