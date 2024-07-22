@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\esolang_files",
-    "\\esolang_files\\__pycache__"
+    "\\esolang_files"
   ],
-  "SelectedNode": "\\esolang_files\\parser.py",
   "PreviewInSolutionExplorer": false
 }

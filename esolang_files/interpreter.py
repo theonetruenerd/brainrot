@@ -3,6 +3,8 @@ import importlib
 from parser import parser
 import logging
 import re
+import tkinter as tk
+from tkinter import filedialog
 
 # A dictionary to hold variable values
 symbol_table = {}
@@ -36,6 +38,13 @@ def eval_expression(expr):
             else:
                 return False
     return expr
+
+# Function to browse files
+def select_file_name():
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename()
+    return file_path
 
 # Function to call functions
 
@@ -206,6 +215,8 @@ def exec_statement(statement):
     elif stmt_type == 'read':
         _, var, filename = statement
         symbol_table[var] = []
+        if filename in symbol_table:
+            filename = symbol_table[filename]
         with open(eval_expression(filename), 'r', encoding='utf-8') as f:
             for line in f:
                 symbol_table[var].append(line)
@@ -235,6 +246,9 @@ def exec_statement(statement):
             symbol_table[var] = True
         else:
             symbol_table[var] = False
+    elif stmt_type == 'file_browse':
+        _, var = statement
+        symbol_table[var] = select_file_name()
 
 
 class BreakLoop(Exception):

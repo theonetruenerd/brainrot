@@ -50,6 +50,7 @@ def p_statement(p):
                  | extract_string_statement
                  | read_statement
                  | valid_statement
+                 | file_browser_statement
                  | empty'''
     p[0] = p[1]
 
@@ -263,7 +264,8 @@ def p_loop_through_list_statement(p):
     p[0] = ('loop_through_list',p[2],p[4],p[7])
 
 def p_read_statement(p):
-    'read_statement : UWU IDENTIFIER WHATSTHIS STRING SEMICOLON'
+    '''read_statement : UWU IDENTIFIER WHATSTHIS STRING SEMICOLON
+                      | UWU IDENTIFIER WHATSTHIS IDENTIFIER SEMICOLON'''
     p[0] = ('read',p[2],p[4])
 
 def p_find_substring_statement(p):
@@ -279,6 +281,10 @@ def p_extract_string_statement(p):
                                 | IDENTIFIER IDENTIFIER GAGGED expression
                                 | IDENTIFIER IDENTIFIER GAGGED IDENTIFIER'''
     p[0] = ('extract_string',p[1],p[2],p[4])
+
+def p_file_browser_statement(p):
+    'file_browser_statement : IDENTIFIER OOMF'
+    p[0] = ('file_browse',p[1])
 
 def p_empty(p):
     'empty :'

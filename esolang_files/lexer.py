@@ -8,7 +8,7 @@ tokens = (
     'TEA','CRINGE','BRUH','REDFLAG','BODYCOUNT','SLEPTON','STAN','NPC','IYKYK','SITUATIONSHIP','HOOKUP',
     'BASED','POURTEA','OOF','ICK','TWEAKING','SNEAKYLINK','BFFR','HOMIES','RUNATRAIN','GETYOURBOY','NOHOMO',
     'MANDEM','COMMA','MID','COOK','BET','BASIC','LEADON','GHOST','UWU','WHATSTHIS','ROMANEMPIRE','ATE','SKIBIDI',
-    'VALID','GAGGED'
+    'VALID','GAGGED','OOMF'
 )
 
 # Regular expression rules for simple tokens
@@ -232,6 +232,10 @@ def t_GAGGED(t):
     r'gagged'
     return t
 
+def t_OOMF(t):
+    r'oomf'
+    return t
+
 # Regular expression rules for simple tokens
 def t_ASSIGN(t):
     r'='
@@ -287,7 +291,6 @@ reserved = {
     'karen': 'KAREN',
     'lit': 'LIT',
     'mew': 'MEW',
-    'oomf': 'OOMF',
     'opp': 'OPP',
     'owned': 'OWNED',
     'rizz': 'RIZZ',
