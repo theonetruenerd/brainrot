@@ -8,7 +8,7 @@ tokens = (
     'TEA','CRINGE','BRUH','REDFLAG','BODYCOUNT','SLEPTON','STAN','NPC','IYKYK','SITUATIONSHIP','HOOKUP',
     'BASED','POURTEA','OOF','ICK','TWEAKING','SNEAKYLINK','BFFR','HOMIES','RUNATRAIN','GETYOURBOY','NOHOMO',
     'MANDEM','COMMA','MID','COOK','BET','BASIC','LEADON','GHOST','UWU','WHATSTHIS','ROMANEMPIRE','ATE','SKIBIDI',
-    'VALID'
+    'VALID','GAGGED'
 )
 
 # Regular expression rules for simple tokens
@@ -228,6 +228,10 @@ def t_VALID(t):
     r'valid'
     return t
 
+def t_GAGGED(t):
+    r'gagged'
+    return t
+
 # Regular expression rules for simple tokens
 def t_ASSIGN(t):
     r'='
@@ -274,11 +278,9 @@ reserved = {
     'era': 'ERA',
     'fanum_tax': 'FANUMTAX',
     'fit': 'FIT',
-    'gagged': 'GAGGED',
     'gatekeep': 'GATEKEEP',
     'gaslight': 'GASLIGHT',
     'girlboss': 'GIRLBOSS',
-    'ghost': 'GHOST',
     'goat': 'GOAT',
     'gyat': 'GYAT',
     'oop': 'OOP',

@@ -47,6 +47,7 @@ def p_statement(p):
                  | list_creation_statement
                  | loop_through_list_statement
                  | find_substring_statement
+                 | extract_string_statement
                  | read_statement
                  | valid_statement
                  | empty'''
@@ -106,6 +107,8 @@ def p_expression(p):
         p[0] = p[1]
     elif p[2] == 'ratios':
         p[0] = ('ratios', p[1], p[3])
+    elif p[2] == 'valid':
+        p[0] = ('valid',p[1])
 
 def p_return_statement(p):
     '''return_statement : ITSGIVING expression SEMICOLON
@@ -269,6 +272,13 @@ def p_find_substring_statement(p):
                                 | IDENTIFIER ROMANEMPIRE IDENTIFIER ATE IDENTIFIER
                                 | IDENTIFIER ROMANEMPIRE expression ATE IDENTIFIER'''
     p[0] = ('find_substring',p[1],p[3],p[5])
+    
+def p_extract_string_statement(p):
+    '''extract_string_statement : IDENTIFIER expression GAGGED expression
+                                | IDENTIFIER expression GAGGED IDENTIFIER
+                                | IDENTIFIER IDENTIFIER GAGGED expression
+                                | IDENTIFIER IDENTIFIER GAGGED IDENTIFIER'''
+    p[0] = ('extract_string',p[1],p[2],p[4])
 
 def p_empty(p):
     'empty :'
