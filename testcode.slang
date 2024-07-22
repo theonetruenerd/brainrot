@@ -5,8 +5,7 @@ lowkey pp = "PipettingParameters";
 
 skibidi x (z) leftpilled
 	present roman_empire z ate "Compatible pipetting parameters"
-	present valid
-	vibe_check(yesno) leftpilled shoutout leftpilled z rightmaxxer; rightmaxxer
+	vibe_check(present) leftpilled shoutout leftpilled z rightmaxxer; rightmaxxer
 rightmaxxer
 
-shoutout("Got shere");
+shoutout("Got here");
