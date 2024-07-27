@@ -5,6 +5,8 @@ import logging
 import re
 import tkinter as tk
 from tkinter import filedialog
+import zipfile
+import py7zr
 
 # A dictionary to hold variable values
 symbol_table = {}
@@ -39,12 +41,38 @@ def eval_expression(expr):
                 return False
     return expr
 
-# Function to browse files
+# Function to manipulate files
 def select_file_name():
     root = tk.Tk()
     root.withdraw()
     file_path = filedialog.askopenfilename()
     return file_path
+
+def select_multi_file_names():
+    root = tk.Tk()
+    root.withdraw()
+    files = filedialog.askopenfilename(
+        title="Select files",
+        filetypes=(("Ulfs", "*.ulf"), ("Zlfs","*.zlf"),("Txts","*.txt"),("All files", "*.*")),
+        multiple=True
+    )
+    return files
+
+def unzip_archive(zip_path, extract_to):
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extractall(extract_to)
+
+def unzip_zlf_archive(zlf_path, extract_to):
+    try:
+        with py7zr.SevenZipFile(zlf_path, mode='r') as z:
+            z.extractall(path=extract_to)
+        print(f"Unzipped {zlf_path} to {extract_to}")
+    except py7zr.Bad7zFile:
+        print(f"Error: {zlf_path} is not a valid 7z file.")
+    except FileNotFoundError:
+        print(f"Error: The file {zlf_path} does not exist.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
 # Function to call functions
 
@@ -77,6 +105,7 @@ def exec_statement(statement):
                 value = float(value)
             elif vartype == 'lead_on':
                 value = str(value)
+                value = value.replace(r'\"','"')
             elif vartype == 'basic':
                 value = int(value)
             elif vartype == 'bet':
@@ -199,7 +228,7 @@ def exec_statement(statement):
         symbol_table[var] = [eval_expression(elem) for elem in elems]
     elif stmt_type == 'get':
         _, ind, ls, elem = statement
-        symbol_table[ind] = symbol_table[ls].index(eval_expression(elem))
+        symbol_table[ind] = symbol_table[ls][int(elem)]
     elif stmt_type == 'add_to_list':
         _, ls, item, ind = statement
         symbol_table[ls].insert(eval_expression(ind), eval_expression(item))
@@ -223,6 +252,8 @@ def exec_statement(statement):
             f.close()
     elif stmt_type == 'find_substring':
         _, var, string, substring = statement
+        string = string.replace(r'\"', '"')
+        substring = substring.replace(r'\"','"')
         if var in symbol_table:
             del symbol_table[var]
         if substring in symbol_table:
@@ -235,6 +266,8 @@ def exec_statement(statement):
             symbol_table[var] = False
     elif stmt_type == 'extract_string':
         _, var, string, substring = statement
+        string = string.replace(r'\"', '"')
+        substring = substring.replace(r'\"','"')
         if substring in symbol_table:
             substring = symbol_table[substring]
         if string in symbol_table:
@@ -249,19 +282,24 @@ def exec_statement(statement):
     elif stmt_type == 'file_browse':
         _, var = statement
         symbol_table[var] = select_file_name()
-
-
-class BreakLoop(Exception):
-    pass
+    elif stmt_type == 'multi_file_browse':
+        _, var = statement
+        symbol_table[var] = select_multi_file_names()
+    elif stmt_type == 'extract_files':
+        _, archive, output = statement
+        if archive in symbol_table:
+            archive = symbol_table[archive]
+        if output in symbol_table:
+            output = symbol_table[output]
+        unzip_zlf_archive(archive, output)
 
 # Function to execute a list of statements
 def exec_statement_list(statements):
     for statement in statements:
+        if statement == 'break':
+            break
         stmt_type = statement[0]
-        if stmt_type == 'break':
-            raise BreakLoop()
-        else:
-            exec_statement(statement)
+        exec_statement(statement)
 
 # Function to interpret the parsed program
 def interpret(program):
