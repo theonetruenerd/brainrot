@@ -1,17 +1,27 @@
-file_path oomf
+pour_tea tea;
 
-uwu heres_whats_wrong whats_this file_path;
+highkey x basic = 5;
+highkey y lead_on = "test";
 
-highkey cpp lead_on = "Compatible pipetting parameters";
-highkey pp lead_on = "PipettingParameters=([^\]]+)";
+shoutout leftpilled y rightmaxxer;
 
-skibidi heres_whats_wrong (where_we_at) leftpilled
-	present roman_empire where_we_at ate cpp
-	gg;
-	vibe_check(present valid) leftpilled
-		parameters where_we_at gagged pp
-		shoutout leftpilled parameters rightmaxxer;
+spill_tea yap leftpilled x rightmaxxer
+
+lowkey y lead_on = "test2";
+
+shoutout leftpilled y rightmaxxer;
+
+file_path oomf;
+
+list homies test3, test4 no_homo
+
+skibidi list (where_we_at) leftpilled
+	shoutout leftpilled where_we_at rightmaxxer;
+	contains_test roman_empire where_we_at ate y
+	vibe_check(contains_test valid) leftpilled
+		shoutout ("----------------");
+		shoutout ("Contains the word test");
+	big_yikes leftpilled
+		shoutout ("Doesn't contain the word test");
 	rightmaxxer
 rightmaxxer
-
-shoutout(test);
