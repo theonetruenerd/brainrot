@@ -1,0 +1,127 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\tchapman\\source\\repos\\brainrot\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\ElysION_LogScripts.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:esolang_files\\ElysION_LogScripts.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\interpreter.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:esolang_files\\interpreter.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tchapman\\source\\repos\\brainrot\\scripts\\avg_channel_devs.slang||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:scripts\\avg_channel_devs.slang||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tchapman\\source\\repos\\brainrot\\run.bat||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:run.bat||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tchapman\\source\\repos\\brainrot\\testcode.slang||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:testcode.slang||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\lexer.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:esolang_files\\lexer.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ElysION_LogScripts.py",
+              "DocumentMoniker": "C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\ElysION_LogScripts.py",
+              "RelativeDocumentMoniker": "esolang_files\\ElysION_LogScripts.py",
+              "ToolTip": "C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\ElysION_LogScripts.py",
+              "RelativeToolTip": "esolang_files\\ElysION_LogScripts.py",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAEsAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-09-20T12:26:43.429Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "run.bat",
+              "DocumentMoniker": "C:\\Users\\tchapman\\source\\repos\\brainrot\\run.bat",
+              "RelativeDocumentMoniker": "run.bat",
+              "ToolTip": "C:\\Users\\tchapman\\source\\repos\\brainrot\\run.bat",
+              "RelativeToolTip": "run.bat",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000614|",
+              "WhenOpened": "2024-09-20T10:59:14.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "testcode.slang",
+              "DocumentMoniker": "C:\\Users\\tchapman\\source\\repos\\brainrot\\testcode.slang",
+              "RelativeDocumentMoniker": "testcode.slang",
+              "ToolTip": "C:\\Users\\tchapman\\source\\repos\\brainrot\\testcode.slang",
+              "RelativeToolTip": "testcode.slang",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-09-20T10:59:10.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "avg_channel_devs.slang",
+              "DocumentMoniker": "C:\\Users\\tchapman\\source\\repos\\brainrot\\scripts\\avg_channel_devs.slang",
+              "RelativeDocumentMoniker": "scripts\\avg_channel_devs.slang",
+              "ToolTip": "C:\\Users\\tchapman\\source\\repos\\brainrot\\scripts\\avg_channel_devs.slang",
+              "RelativeToolTip": "scripts\\avg_channel_devs.slang",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-08-29T10:22:56.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "interpreter.py",
+              "DocumentMoniker": "C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\interpreter.py",
+              "RelativeDocumentMoniker": "esolang_files\\interpreter.py",
+              "ToolTip": "C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\interpreter.py",
+              "RelativeToolTip": "esolang_files\\interpreter.py",
+              "ViewState": "AgIAAC8BAACAOR6kzx8wwEUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-07-22T08:16:35.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "lexer.py",
+              "DocumentMoniker": "C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\lexer.py",
+              "RelativeDocumentMoniker": "esolang_files\\lexer.py",
+              "ToolTip": "C:\\Users\\tchapman\\source\\repos\\brainrot\\esolang_files\\lexer.py",
+              "RelativeToolTip": "esolang_files\\lexer.py",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAADYBAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-07-22T08:24:41.474Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

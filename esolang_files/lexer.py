@@ -8,7 +8,7 @@ tokens = (
     'TEA','CRINGE','BRUH','REDFLAG','BODYCOUNT','SLEPTON','STAN','NPC','IYKYK','SITUATIONSHIP','HOOKUP',
     'BASED','POURTEA','OOF','ICK','TWEAKING','SNEAKYLINK','BFFR','HOMIES','RUNATRAIN','GETYOURBOY','NOHOMO',
     'MANDEM','COMMA','MID','COOK','BET','BASIC','LEADON','GHOST','UWU','WHATSTHIS','ROMANEMPIRE','ATE','SKIBIDI',
-    'VALID','GAGGED','OOMF'
+    'VALID','GAGGED','OOMF','OPPS','SNATCHED','AURA','OWNED'
 )
 
 # Regular expression rules for simple tokens
@@ -236,6 +236,22 @@ def t_OOMF(t):
     r'oomf'
     return t
 
+def t_OPPS(t):
+    r'opps'
+    return t
+
+def t_SNATCHED(t):
+    r'snatched'
+    return t
+
+def t_AURA(t):
+    r'aura'
+    return t
+
+def t_OWNED(t):
+    r'owned'
+    return t
+
 # Regular expression rules for simple tokens
 def t_ASSIGN(t):
     r'='
@@ -274,7 +290,6 @@ def t_COMMA(t):
 
 # Define a dictionary of reserved words for the lexer
 reserved = {
-    'aura': 'AURA',
     'banger': 'BANGER',
     'brainrot': 'BRAINROT',
     'cook': 'COOK',
@@ -291,17 +306,13 @@ reserved = {
     'karen': 'KAREN',
     'lit': 'LIT',
     'mew': 'MEW',
-    'opp': 'OPP',
-    'owned': 'OWNED',
     'rizz': 'RIZZ',
     'salty': 'SALTY',
     'shook': 'SHOOK',
     'sigma': 'SIGMA',
     'simp': 'SIMP',
-    'skibidi': 'SKIBIDI',
     'slaps': 'SLAPS',
     'slay': 'SLAY',
-    'snatched': 'SNATCHED',
     'sus': 'SUS',
     'touch_grass': 'TOUCHGRASS',
     'wig': 'WIG'

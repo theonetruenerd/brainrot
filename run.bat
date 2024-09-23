@@ -1,1 +1,1 @@
-py esolang_files\interpreter.py testcode.slang
+py esolang_files\interpreter.py C:\Users\tchapman\source\repos\brainrot\scripts\cv_r_extractor.slang

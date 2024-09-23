@@ -1,7 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\esolang_files"
+    "\\build",
+    "\\build\\avg_channel_devs",
+    "\\build\\ElysION_LogScripts",
+    "\\build\\interpreter",
+    "\\ButtonImages",
+    "\\esolang_files",
+    "\\scripts"
   ],
+  "SelectedNode": "\\esolang_files\\ElysION_LogScripts.py",
   "PreviewInSolutionExplorer": false
 }

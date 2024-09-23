@@ -182,7 +182,7 @@ def exec_statement(statement):
         try:
             importlib.import_module(lib_name)
         except ImportError:
-            print(f"Error: Could not import module {lib_name}")
+            raise Exception(f"Error: Could not import module {lib_name}")
     elif stmt_type == 'def':
         _, func_name, params, body = statement
         symbol_table[func_name] = ['def',params, body]
@@ -292,6 +292,12 @@ def exec_statement(statement):
         if output in symbol_table:
             output = symbol_table[output]
         unzip_zlf_archive(archive, output)
+    elif stmt_type == 'get_type':
+        _, recieved_type, variable = statement
+        if variable in symbol_table:
+            symbol_table[recieved_type] = symbol_table[variable].type()
+        else:
+            raise Exception(f"{variable} not declared")
 
 # Function to execute a list of statements
 def exec_statement_list(statements):
